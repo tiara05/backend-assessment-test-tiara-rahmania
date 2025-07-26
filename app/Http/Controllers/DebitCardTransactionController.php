@@ -26,6 +26,7 @@ class DebitCardTransactionController extends BaseController
      */
     public function index(DebitCardTransactionShowIndexRequest $request): JsonResponse
     {
+        $this->authorize('viewAny', DebitCardTransaction::class); 
         $debitCard = DebitCard::find($request->input('debit_card_id'));
 
         $debitCardTransactions = $debitCard

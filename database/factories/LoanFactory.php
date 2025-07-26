@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Loan;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LoanFactory extends Factory
@@ -21,8 +22,17 @@ class LoanFactory extends Factory
      */
     public function definition(): array
     {
+        $amount = $this->faker->randomElement([3000, 6000]);
+        $terms = $amount === 3000 ? 3 : 6;
+
         return [
-            // TODO: Complete factory
+            'user_id' => User::factory(),
+            'amount' => $amount,
+            'terms' => $terms,
+            'outstanding_amount' => $amount,
+            'currency_code' => 'USD',
+            'processed_at' => now(),
+            'status' => 'approved',
         ];
     }
 }

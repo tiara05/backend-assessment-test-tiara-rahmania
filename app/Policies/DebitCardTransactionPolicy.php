@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Polocies;
+namespace App\Policies;
 
 use App\Models\DebitCard;
 use App\Models\DebitCardTransaction;
@@ -26,6 +26,13 @@ class DebitCardTransactionPolicy
     {
         return $user->is($debitCardTransaction->debitCard->user);
     }
+
+    public function viewAny(User $user): bool
+    {
+        \Log::info("Policy viewAny dipanggil untuk user: {$user->id}");
+        return true;
+    }
+
 
     /**
      * Create a Debit card transaction
